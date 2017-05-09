@@ -1,0 +1,48 @@
+.common-container{
+	padding: 20px 10px;
+	height:100vh;
+}
+.header-container{
+	height: 30%;
+}
+.content-container{
+	height: 50%;
+}
+.search-row{
+	margin: auto;
+    width: 70%;
+}
+.buttons-wrapper{
+    display: inline-block;
+    float: right;
+    padding-left: 2px;
+    height: 35px;
+}
+.form-group{
+    display: inline-block;
+    float: right;
+    padding-left: 2px;
+    height: 35px;
+}
+.overflow-auto {
+    overflow: auto;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

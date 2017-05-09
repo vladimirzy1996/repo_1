@@ -1,0 +1,25 @@
+.common-container{
+	padding: 20px 10px;
+	height:100vh;
+}
+.header-container{
+	height: 30%;
+}
+.content-container{
+	height: 50%;
+}
+.search-row{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+    width: 70%;
+}
+.form-group{
+    display: inline-block;
+    float: right;
+    padding-left: 2px;
+    height: 35px;
+}
+.overflow-auto {
+    overflow: auto;
+}

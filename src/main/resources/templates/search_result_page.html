@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />
+
+<link rel="stylesheet" th:href="@{/css/search_result_page.css}" href="../../css/search_result_page.css" />
+</head>
+<body>
+	<div class="content-container">
+		<div class="row">
+			<div class="search-row">
+				<div class="overflow-auto">
+					<i class="icon-search "></i> <input name="searchTool" type="text" class="form-control" th:value="${searchRequest}" th:readonly="true"/>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<h2>Search results</h2>
+			<div class="panel-group">
+				<div class="panel panel-primary">
+					<th:block th:each="result : ${resultList}">
+						<div class="panel-heading" th:text="${result.word}">...</div>
+						<div class="panel-body" th:text="${result.line}">...</div>
+						<div class="panel-body" th:text="'Line index: '+${result.lineIndex}+', Position in line: '+${result.linePositionIndex}">...</div>
+					</th:block>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
