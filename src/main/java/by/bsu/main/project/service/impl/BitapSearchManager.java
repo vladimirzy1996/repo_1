@@ -2,6 +2,7 @@ package by.bsu.main.project.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import by.bsu.main.project.entity.SearchResult;
 import by.bsu.main.project.service.SearchManager;
@@ -10,20 +11,51 @@ public class BitapSearchManager implements SearchManager {
 
 	@Override
 	public List<SearchResult> searchString(String searchingString, byte[] text) {
-		String doc = new String(text);
-		int length = searchingString.length();
-		List<Integer> indexes = find(doc, searchingString, length / 3);
+		StringTokenizer doc = new StringTokenizer(new String(text), "\n");
 		List<SearchResult> searchResults = new ArrayList<SearchResult>();
-		for (Integer index : indexes) {
-			SearchResult searchResult = new SearchResult();
-			searchResult.setWord(doc.substring(index, index + (length * 2)));
-			searchResult.setLine(doc.substring(index - (length * 2), index + (length * 2)));
-			searchResult.setLinePositionIndex(0);
-			searchResult.setLineIndex(0);
+		int i = 0;
+		while (doc.hasMoreTokens()) {
+			int length = searchingString.length();
+			String nextToken = doc.nextToken();
+			List<Integer> indexes = find(nextToken, searchingString, length / 3);
+			for (Integer index : indexes) {
+				if (index >= 0) {
+					SearchResult searchResult = new SearchResult();
+					searchResult.setWord(getWordInLineByIndex(nextToken, index));
+					searchResult.setLine(nextToken);
+					searchResult.setLinePositionIndex(getLinePositionIndex(nextToken, index));
+					searchResult.setLineIndex(i);
+					searchResults.add(searchResult);
+				}
+				i++;
+			}
 		}
 		return searchResults;
 	}
 
+	private String getWordInLineByIndex(String line, int index) {
+		StringBuilder strBuild = new StringBuilder();
+		int i = index + 1;
+		while (!Character.isWhitespace(line.charAt(i))) {
+			strBuild.append(line.charAt(i));
+			i++;
+		}
+		return strBuild.toString();
+	}
+
+	private int getLinePositionIndex(String line, int index) {
+		StringTokenizer strTok = new StringTokenizer(line);
+		int length = 0;
+		int result = 0;
+		while (length < index) {
+			if (strTok.hasMoreTokens()) {
+				length += strTok.nextToken().length();
+				result++;
+			}
+		}
+		return result;
+
+	}
 	// http://en.wikipedia.org/wiki/Bitap_algorithm
 
 	/**

@@ -472,7 +472,19 @@ public class StemmerPorterImpl implements TextAnalyzer {
 		}
 	}
 
-	private String stem(String searchRequest) {
+	private String cleanup(String word) {
+		int last = word.length();
+		String temp = "";
+		for (int i = 0; i < last; i++) {
+			if ((word.charAt(i) >= 'a') & (word.charAt(i) <= 'z')) {
+				temp += word.charAt(i);
+			}
+		}
+		return temp;
+	}
+
+	public String stem(String searchRequest) {
+		searchRequest = cleanup(searchRequest.toLowerCase());
 		add(searchRequest.toCharArray(), searchRequest.length());
 		k = beginLength - 1;
 		if (k > 1) {

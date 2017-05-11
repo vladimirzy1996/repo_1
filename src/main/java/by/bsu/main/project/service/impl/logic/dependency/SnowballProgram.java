@@ -12,7 +12,20 @@ public class SnowballProgram {
 	/**
 	 * Set the current string.
 	 */
+
+	private String cleanup(String word) {
+		int last = word.length();
+		String temp = "";
+		for (int i = 0; i < last; i++) {
+			if ((word.charAt(i) >= 'a') & (word.charAt(i) <= 'z')) {
+				temp += word.charAt(i);
+			}
+		}
+		return temp;
+	}
+
 	public void setCurrent(String value) {
+		value = cleanup(value.toLowerCase());
 		current.replace(0, current.length(), value);
 		cursor = 0;
 		limit = current.length();
