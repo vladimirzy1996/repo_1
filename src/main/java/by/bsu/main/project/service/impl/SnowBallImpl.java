@@ -11,7 +11,7 @@ import by.bsu.main.project.service.impl.logic.dependency.SnowballStemmer;
 
 public class SnowBallImpl implements TextAnalyzer {
 	private SnowballStemmer snowballStemmer = new EnglishSnowBallStemmer();
-	private SearchManager searchManager = new BitapSearchManager();
+	private SearchManager searchManager = new SimpleSearchManagerImpl();
 
 	@Override
 	public List<SearchResult> execute(String searchRequest, byte[] text) {
